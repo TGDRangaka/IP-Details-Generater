@@ -61,12 +61,10 @@ $('#searchBtn').on('click', ()=>{
     let hostPerSubnet = 0;
 
     if(!prefixBits && !ddn && !binarySubnet){
-        isHaveSubnet = false;
         prefixBits = networkBits;
         ddn = prefixBitsToDdn(prefixBits);
         binarySubnet = ddnToBinary(ddn);
     }else{
-        isHaveSubnet = true;
         if($("input[name='subnet']:checked").val() == 'prefix'){
             hostBits = hostBits - subnetBits;
             ddn = prefixBitsToDdn(prefixBits);
@@ -82,6 +80,7 @@ $('#searchBtn').on('click', ()=>{
         subnetBits = prefixBits - networkBits;
         hostBits = 32 - prefixBits;
     }
+    isHaveSubnet = subnetBits == 0 ? false : true;
     totalHosts = Math.pow(2,hostBits) -2;
     totalSubnets = Math.pow(2, subnetBits);
     hostPerSubnet = `2<sup>${hostBits}</sup> - 2`;
