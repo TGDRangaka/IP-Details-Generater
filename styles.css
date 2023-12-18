@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    /* background-color: #121212;
+    color: white; */
+}
+
+.flex {
+    display: flex;
+    gap: 5px;
+}
+
+.generating-values .row{
+    margin-bottom: 5px;
+}
+
+.generating-values .row div {
+    /* font-size: 20px; */
+}
+
+.generating-values .row > div:first-child{
+    font-weight: bold;
+}

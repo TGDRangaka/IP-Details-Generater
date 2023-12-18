@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Generater</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Normalize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <form class="container-fluid mb-5">
+
+        <!-- IP address -->
+        <h1>IP Address</h1>
+        <div class="row">
+            <div class="col-lg-2">
+                  <label for="ipAddress">IP address</label>
+                  <div class="flex">
+                    <input type="text" class="form-control" id="ipAddress">
+                    <button id="searchBtn" type="button" class="btn btn-primary mb-3" disabled><i class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-floating">
+                  <label for="binaryAddress">Binary address</label>
+                  <input type="text" class="form-control" id="binaryAddress" readonly>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- Analysis of Subnetting -->
+        <h2>Analysis of Subnetting</h2>
+        <div class="row">
+            <div class="col-lg-1">
+                <div class="form-floating">
+                    <label for="prefix">Prefix</label>
+                    <span><input class="ml-3" type="radio" id="prefix-rbtn" name="subnet" value="prefix" checked></span>
+                    <input type="number" class="form-control" id="prefix">
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-floating">
+                    <label for="ddn">DDN</label>
+                    <span><input class="ml-3" type="radio" id="ddn-rbtn" name="subnet" value="ddn"></span>
+                    <input type="text" class="form-control" id="ddn">
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-floating">
+                    <label for="binary">Binary</label>
+                    <span><input class="ml-3" type="radio" id="binary-rbtn" name="subnet" value="binary"></span>
+                    <input type="text" class="form-control" id="binary">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Generating Details -->
+
+        <div class="row g-3 generating-values">
+
+            <div class="col-lg-4 text-center">
+                <h1>Common Informations</h1>
+
+                <div class="row">
+                    <div class="col text-right">Class : </div>
+                    <div class="col text-left">A</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Network Octets : </div>
+                    <div class="col text-left">1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Network Bits : </div>
+                    <div class="col text-left">8</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Subnet Bits : </div>
+                    <div class="col text-left">4</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Host Bits : </div>
+                    <div class="col text-left">20</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Network ID : </div>
+                    <div class="col text-left">84.0.0.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Valid Networks : </div>
+                    <div class="col text-left">1.0.0.0 - 126.0.0.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Total Networks : </div>
+                    <div class="col text-left">64<sup>7</sup></div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Total Subnets : </div>
+                    <div class="col text-left">4<sup>7</sup></div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Hosts Per Subnet : </div>
+                    <div class="col text-left">20<sup>7</sup> - 2</div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h1>First Subnet</h1>
+
+                <div class="row">
+                    <div class="col text-right">Subnet’s ID : </div>
+                    <div class="col text-left">192.12.12.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">First assignable IP : </div>
+                    <div class="col text-left">192.12.12.1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Last assignable IP : </div>
+                    <div class="col text-left">192.12.12.254</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Broadcast IP : </div>
+                    <div class="col text-left">192.12.12.255</div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h1>Second Subnet</h1>
+
+                <div class="row">
+                    <div class="col text-right">Subnet’s ID : </div>
+                    <div class="col text-left">192.12.12.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">First assignable IP : </div>
+                    <div class="col text-left">192.12.12.1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Last assignable IP : </div>
+                    <div class="col text-left">192.12.12.254</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Broadcast IP : </div>
+                    <div class="col text-left">192.12.12.255</div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h1>Last Subnet</h1>
+
+                <div class="row">
+                    <div class="col text-right">Subnet’s ID : </div>
+                    <div class="col text-left">192.12.12.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">First assignable IP : </div>
+                    <div class="col text-left">192.12.12.1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Last assignable IP : </div>
+                    <div class="col text-left">192.12.12.254</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Broadcast IP : </div>
+                    <div class="col text-left">192.12.12.255</div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h1>Exisiting Subnet</h1>
+
+                <div class="row">
+                    <div class="col text-right">Subnet’s ID : </div>
+                    <div class="col text-left">192.12.12.0</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">First assignable IP : </div>
+                    <div class="col text-left">192.12.12.1</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Last assignable IP : </div>
+                    <div class="col text-left">192.12.12.254</div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">Broadcast IP : </div>
+                    <div class="col text-left">192.12.12.255</div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </form>
+    
+    
+    <!-- jQuerry -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Fontawsome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
