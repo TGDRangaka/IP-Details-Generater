@@ -12,6 +12,24 @@ $('#ipAddress').on('input', function(){
     }
 });
 
+$('input[type="radio"]').change(function() {
+    var selectedValue = $(this).val();
+
+    if (selectedValue === 'prefix') {
+        $('#prefix').prop('disabled', false);
+        $('#ddn').prop('disabled', true);
+        $('#binary').prop('disabled', true);
+    } else if (selectedValue === 'ddn') {
+        $('#prefix').prop('disabled', true);
+        $('#ddn').prop('disabled', false);
+        $('#binary').prop('disabled', true);
+    } else if (selectedValue === 'binary') {
+        $('#prefix').prop('disabled', true);
+        $('#ddn').prop('disabled', true);
+        $('#binary').prop('disabled', false);
+    }
+});
+
 $('#searchBtn').on('click', ()=>{
     let isHaveSubnet = false;
 
@@ -66,7 +84,7 @@ $('#searchBtn').on('click', ()=>{
     }
     totalHosts = Math.pow(2,hostBits) -2;
     totalSubnets = Math.pow(2, subnetBits);
-    hostPerSubnet = totalHosts;
+    hostPerSubnet = `2<sup>${hostBits}</sup> - 2`;
 
 //      first network
     let f1NetworkId = '';
@@ -115,45 +133,100 @@ $('#searchBtn').on('click', ()=>{
 
 
 //   see details
-    console.log(
-        'IP : ' + ip +
-        '\nIP Binary : ' + binaryIp +
-        '\nclass : ' + ipCls +
-        '\nnetwork octets : ' + newworkOctets +
-        '\nnetwork bits : ' + networkBits +
-        '\nsubnet bits : ' + subnetBits + 
-        '\nhost bits : ' + hostBits + 
-        '\nnetwork ID : ' + networkId + 
-        '\nvalid networks : ' + validNetworks +
-        '\ntotal networks : ' + totalNetworks +
-        '\ntotal networks : ' + (ipCls=='A'?'2<sup>7</sup> - 2':ipCls=='B'?'2<sup>14</sup>':ipCls=='C'?'2<sup>21</sup>':'N/A') +
-        '\ntotal hosts : ' + totalHosts +
-        '\ntotal subnets : ' + totalSubnets +
-        '\nhosts per subnet : ' + hostPerSubnet +
-        '\nprefix : ' + prefixBits +
-        '\nddn : ' + ddn +
-        '\nbinary : ' + binarySubnet +
-        '\n-----------------------------' +
-        '\nF1 Network Id : ' + f1NetworkId +
-        '\nF1 First ip address : ' + f1FirstUsableIP +
-        '\nF1 Last ip address : ' + f1LastUsableIP +
-        '\nF1 Broadcast IP : ' + f1BroadcastIp +
-        '\n-----------------------------' +
-        '\nF2 Network IP : ' + f2NetworkId +
-        '\nF2 First ip address : ' + f2FirstUsableIp +
-        '\nF2 Last ip address : ' + f2LastUsableIp +
-        '\nF2 Broadcast IP : ' + f2BroadcastIp +
-        '\n-----------------------------' +
-        '\nLast Network IP : ' + lastNetworkId +
-        '\nLast First ip address : ' + lastFirstUsableIp +
-        '\nLast Last ip address : ' + lastLastUsableIp +
-        '\nLast Broadcast IP : ' + lastBroadcaseIp +
-        '\n-----------------------------' +
-        '\nCurrent Network IP : ' + currentNetworkId +
-        '\nCurrent First ip address : ' + currentFirstUsableIp +
-        '\nCurrent Last ip address : ' + currentLastUsableIp +
-        '\nCurrent Broadcast IP : ' + currentBroadcastIp
-    );
+    // console.log(
+    //     'IP : ' + ip +
+    //     '\nIP Binary : ' + binaryIp +
+    //     '\nclass : ' + ipCls +
+    //     '\nnetwork octets : ' + newworkOctets +
+    //     '\nnetwork bits : ' + networkBits +
+    //     '\nsubnet bits : ' + subnetBits + 
+    //     '\nhost bits : ' + hostBits + 
+    //     '\nnetwork ID : ' + networkId + 
+    //     '\nvalid networks : ' + validNetworks +
+    //     '\ntotal networks : ' + totalNetworks +
+    //     '\ntotal networks : ' + (ipCls=='A'?'2<sup>7</sup> - 2':ipCls=='B'?'2<sup>14</sup>':ipCls=='C'?'2<sup>21</sup>':'N/A') +
+    //     '\ntotal hosts : ' + totalHosts +
+    //     '\ntotal subnets : ' + totalSubnets +
+    //     '\nhosts per subnet : ' + hostPerSubnet +
+    //     '\nprefix : ' + prefixBits +
+    //     '\nddn : ' + ddn +
+    //     '\nbinary : ' + binarySubnet +
+    //     '\n-----------------------------' +
+    //     '\nF1 Network Id : ' + f1NetworkId +
+    //     '\nF1 First ip address : ' + f1FirstUsableIP +
+    //     '\nF1 Last ip address : ' + f1LastUsableIP +
+    //     '\nF1 Broadcast IP : ' + f1BroadcastIp +
+    //     '\n-----------------------------' +
+    //     '\nF2 Network IP : ' + f2NetworkId +
+    //     '\nF2 First ip address : ' + f2FirstUsableIp +
+    //     '\nF2 Last ip address : ' + f2LastUsableIp +
+    //     '\nF2 Broadcast IP : ' + f2BroadcastIp +
+    //     '\n-----------------------------' +
+    //     '\nLast Network IP : ' + lastNetworkId +
+    //     '\nLast First ip address : ' + lastFirstUsableIp +
+    //     '\nLast Last ip address : ' + lastLastUsableIp +
+    //     '\nLast Broadcast IP : ' + lastBroadcaseIp +
+    //     '\n-----------------------------' +
+    //     '\nCurrent Network IP : ' + currentNetworkId +
+    //     '\nCurrent First ip address : ' + currentFirstUsableIp +
+    //     '\nCurrent Last ip address : ' + currentLastUsableIp +
+    //     '\nCurrent Broadcast IP : ' + currentBroadcastIp
+    // );
+
+    // set data
+    $('#prefix').val(prefixBits);
+    $('#ddn').val(ddn);
+    $('#binary').val(binarySubnet);
+
+    // common details
+    $('#class').text(ipCls);
+    $('#networkOctets').text(networkBits/8);
+    $('#networkBits').text(networkBits);
+    $('#subnetBits').text(subnetBits);
+    $('#hostBits').text(hostBits);
+    $('#networkId').text(networkId);
+    $('#validNetworkRange').text(validNetworks);
+    $('#totalNetworks').html((ipCls=='A'?'2<sup>7</sup> - 2':ipCls=='B'?'2<sup>14</sup>':ipCls=='C'?'2<sup>21</sup>':'N/A') + ` (${totalNetworks})`);
+    $('#totalSubnets').text(subnetBits == 0 ? 0 : totalSubnets);
+    $('#hostsPerSubnet').html(subnetBits == 0 ? '0' : hostPerSubnet + ' (' +totalHosts+')');
+    $('#totalHosts').html(subnetBits == 0 ? hostPerSubnet + ' (' +totalHosts+')' : totalSubnets * (Math.pow(2,hostBits) -2));
+
+    // first network
+    $('#firstNetwork .id').text(f1NetworkId);
+    $('#firstNetwork .firstIp').text(f1FirstUsableIP);
+    $('#firstNetwork .lastIp').text(f1LastUsableIP);
+    $('#firstNetwork .broadcastIp').text(f1BroadcastIp);
+
+    // second network
+    $('#secondNetwork .id').text(f2NetworkId);
+    $('#secondNetwork .firstIp').text(f2FirstUsableIp);
+    $('#secondNetwork .lastIp').text(f2LastUsableIp);
+    $('#secondNetwork .broadcastIp').text(f2BroadcastIp);
+
+    // last network
+    $('#lastNetwork .id').text(lastNetworkId);
+    $('#lastNetwork .firstIp').text(lastFirstUsableIp);
+    $('#lastNetwork .lastIp').text(lastLastUsableIp);
+    $('#lastNetwork .broadcastIp').text(lastBroadcaseIp);
+
+    // exisiting network
+    $('#exisitingNetwork .id').text(currentNetworkId);
+    $('#exisitingNetwork .firstIp').text(currentFirstUsableIp);
+    $('#exisitingNetwork .lastIp').text(currentLastUsableIp);
+    $('#exisitingNetwork .broadcastIp').text(currentBroadcastIp);
+
+    if(isHaveSubnet){
+        $('#firstTitle').text('First Subnet');
+        $('#secondTitle').text('Second Subnet');
+        $('#lastTitle').text('Last Subnet');
+        $('#exisitingTitle').text('Exisiting Subnet');
+    }else{
+        $('#firstTitle').text('First Network');
+        $('#secondTitle').text('Second Network');
+        $('#lastTitle').text('Last Network');
+        $('#exisitingTitle').text('Exisiting Network');
+    }
+
 });
 
 function getCurrentNetworkId(binaryIp, prefixBits, hostBits){
